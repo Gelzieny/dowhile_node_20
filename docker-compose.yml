@@ -1,0 +1,23 @@
+version: "3.8" # Remova esta linha se estiver usando Docker Swarm
+
+services:
+  mongos:
+    image: mongo:8
+    ports:
+      - 27017:27017
+    networks:
+      - app_network
+    volumes:
+      - mongodb_data:/data/db # Volume local
+      - mongodb_configdb_data:/data/configdb # Volume local
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: devRoot
+
+volumes:
+  mongodb_data: {} # Define o volume local
+  mongodb_configdb_data: {} # Define o volume local
+
+networks:
+  app_network:
